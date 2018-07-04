@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    <style>
+        .form-login {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        input {
+            height: 50px;
+            border-radius: 25px;
+            border: 1.5px solid #e5efea;
+        }
+        button {
+            height: 50px;
+            width: 150px;
+            background: coral;
+            color: #fff;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-login">
+        <h1>Login</h1>
+        <form action="http://localhost:3000/?action=dangnhap" method="POST">
+            <input type="text" placeholder="Username">
+            <input type="password" placeholder="Password">
+            <button type="submit">Login</button>
+            <div><a href="">Forgot password</a></div>
+        </form>
+    </div>
+</body>
+</html>

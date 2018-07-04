@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Scope permissions</title>
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+    <style>
+        body {
+            background: url("https://wallpapertag.com/wallpaper/full/5/d/2/405963-beautiful-nice-background-3840x2160-for-full-hd.jpg");
+            background-size: cover;
+        }
+
+        .form-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        h1 {
+            font-size: 50px;
+            color: beige;
+        }
+
+        h3 {
+            color: darkgreen;
+            font-size: 27px;
+        }
+
+        button {
+            height: 40px;
+            width: 200px;
+            border-radius: 30px;
+            background: burlywood;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-center">
+        <h1>Do you want allow </h1>
+        <h3>Age</h3>
+        <form action="http://localhost:3000/authorize?action=accept" method="POST">
+            <button type="submit" id="btn-accept">ACCEPT</button>
+            <button id="btn-deny" style="background: firebrick">DENY</button>
+        </form>
+    </div>
+</body>
+
+</html>
