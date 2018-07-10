@@ -3,8 +3,6 @@ const url = require("url");
 const fs = require("fs");
 const pug = require("pug");
 
-const test = require("./abc");
-
 var token = null;
 
 var mockClient = {
@@ -14,7 +12,7 @@ var mockClient = {
 
 var mockCode = "";
 
-var sang = "";
+var ageUser = "";
 
 http.createServer((req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -27,7 +25,7 @@ http.createServer((req, res) => {
 
     // getUserProfile();
     if (pathname === "/") {
-        fs.readFile("./view/login.html", (err, data) => {
+        pug.renderFile("./view/login.pug", (err, data) => {
             if (err) throw err;
             res.writeHead(200, {
                 "Centent-Type": "text/html"
@@ -36,11 +34,11 @@ http.createServer((req, res) => {
         });
     }
 
-    if (pathname == "/user") {
+    if (pathname === "/user") {
         pug.renderFile(
             "./view/user.pug",
             {
-                sang: sang
+                ageUser: ageUser 
             },
             (err, data) => {
                 if (err) throw err;
@@ -53,14 +51,16 @@ http.createServer((req, res) => {
         );
     }
 
-    if (req.method === "GET" && pathname === "/loginOther") {
+    if (req.method === "GET" && pathname === "/login-other") {
         let url =
             "http://localhost:3000/authorize?response_type=code" +
             "&client_id=" +
             mockClient.client_id +
             "&redirect_url=http://localhost:3003/code" +
             "&scope=age";
-        res.writeHead(301, { Location: url });
+        res.statusCode = 302;
+        res.setHeader("Location", url);
+        // res.writeH(301, { Location: url });
         res.end();
     }
 
@@ -77,7 +77,7 @@ http.createServer((req, res) => {
                     "&redirect_url=http://localhost:3003/user",
                 method: "POST",
                 headers: {
-                    Authorization: "Bearer " + token + "dasdad",
+                    Authorization: "Bearer " + token,
                     "Content-Type": "application/json"
                 }
             };
@@ -85,7 +85,7 @@ http.createServer((req, res) => {
             var req = http.request(options, function(res) {
                 res.setEncoding("utf8");
                 res.on("data", function(body) {
-                    sang = body;
+                    ageUser = body;
                 });
             });
             req.on("error", function(e) {
@@ -129,29 +129,12 @@ http.createServer((req, res) => {
             },100)
         }
         run();
+        // res.setHeader("Location", "http://localhost:3003/land");
         res.writeHead(301, { Location: "http://localhost:3003/land" });
         res.end();
     }
     if (pathname === "/land") {
-        fs.readFile("./view/landingpage.html", (err, data) => {
-            if (err) throw err;
-            res.writeHead(200, {
-                "Centent-Type": "text/html"
-            });
-            res.end(data);
-        });
-    }
-    if (pathname == "/waitToken") {
-        fs.readFile("./view/waitToken.html", (err, data) => {
-            if (err) throw err;
-            res.writeHead(200, {
-                "Centent-Type": "text/html"
-            });
-            res.end(data);
-        });
-    }
-    if (pathname == "/profile") {
-        pug.renderFile("./view/user.pug", { sang: sang }, (err, data) => {
+        pug.renderFile("./view/landingpage.pug", (err, data) => {
             if (err) throw err;
             res.writeHead(200, {
                 "Centent-Type": "text/html"
@@ -160,7 +143,36 @@ http.createServer((req, res) => {
         });
     }
 
-    if (pathname == "/login") {
+    if (pathname === "/home") {
+        pug.renderFile("./view/home.pug", (err, data) => {
+            if (err) throw err;
+            res.writeHead(200, {
+                "Centent-Type": "text/html"
+            });
+            res.end(data);
+        });
+    }
+
+    if (pathname === "/waitToken") {
+        fs.readFile("./view/waitToken.html", (err, data) => {
+            if (err) throw err;
+            res.writeHead(200, {
+                "Centent-Type": "text/html"
+            });
+            res.end(data);
+        });
+    }
+    if (pathname === "/profile") {
+        pug.renderFile("./view/user.pug", { ageUser: ageUser }, (err, data) => {
+            if (err) throw err;
+            res.writeHead(200, {
+                "Centent-Type": "text/html"
+            });
+            res.end(data);
+        });
+    }
+
+    if (pathname === "/login") {
         fs.readFile("./view/login.html", (err, data) => {
             if (err) throw err;
             res.writeHead(200, {

@@ -1,24 +1,33 @@
-var http = require("http");
-var url = require("url");
-var fs = require("fs");
-var jwt = require("jsonwebtoken");
-var crypto = require("crypto");
-var qs = require("querystring");
+const http = require("http");
+const url = require("url");
+const fs = require("fs");
+const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
+const qs = require("querystring");
+const pug = require("pug");
 
 var infor = {
     redirect_url: ""
 };
+
+var dbClients = [
+    {
+        id: 001,
+        client_id: 123456789,
+        redirect_url: "http://localhost:3003/code"
+    },
+    {
+        id: 002,
+        client_id: 987654321,
+        redirect_url: "http://localhost:2222/code"
+    }
+];
 
 var user1 = {
     username: "shiorsher@gmail.com ",
     password: "something",
     id: "",
     age: 22
-};
-
-var client = {
-    client_id: "cliet_id_1",
-    clien_secret: "client_secret_1"
 };
 
 var obj = {
@@ -40,26 +49,59 @@ http.createServer((req, res) => {
     var pathname = url.parse(req.url, true).pathname;
 
     //when app request impicit Post: code, codeId, code_secret
-    if(pathname==="/") {
-        res.end("<h1>Landing page 3000</h1>");
-    }
-
-    if (req.method == "GET" && pathname == "/authorize") {
-        infor.redirect_url = urlLink.redirect_url;
-        fs.readFile("./view/authozrize.html", (err, html) => {
-            res.writeHead(200, { "Content-Type": "text/html" });
+    if (pathname === "/") {
+        pug.renderFile("./view/landingpage.pug", (err, html) => {
+            if (err) throw err;
             res.end(html);
         });
     }
 
-    if (req.method == "POST" && pathname === "/authorize") {
-        let action = urlLink.action;
-        if (action === "accept") {
-            let genCode = require("./Model/genCode");
-            let url = infor.redirect_url + "?code=" + genCode();
-            res.writeHead(302, { Location: url });
-            res.end();
+    if (req.method === "GET" && pathname === "/authorize") {
+        let checkClients = require("./Model/CheckClient");
+        let client_id = urlLink.client_id;
+        let redirect_url = urlLink.redirect_url;
+        let client = {
+            nameClient: "Companyname",
+            linkClient:
+                "https://www.freelogodesign.org/Content/img/logo-ex-7.png"
+        };
+        if (checkClients(dbClients, client_id, redirect_url)) {
+            pug.renderFile(
+                "./view/authozrize.pug",
+                { client: client },
+                (err, html) => {
+                    res.writeHead(200, { "Content-Type": "text/html" });
+                    res.end(html);
+                }
+            );
+        } else {
+            res.writeHead(404, { "Content-Type": "text/html" });
+            res.end("Wrong client");
         }
+    }
+
+    if (req.method === "POST" && pathname === "/authorize") {
+        let action = urlLink.action;
+        let body = "";
+        req.on("data", chunk => {
+            body += chunk; // convert Buffer to string
+            if (body.length > 1e6) request.connection.destroy();
+        });
+        req.on("end", () => {
+            userInfor = qs.parse(body);
+            let checkLogin = require("./Model/checkLogin");
+            if (checkLogin(userInfor.username, userInfor.password)) {
+                let genCode = require("./Model/GenCode");
+                let url = "http://localhost:3003/code" + "?code=" + genCode();
+                res.statusCode = 302;
+                res.setHeader("Location", url);
+                res.end();
+            } else {
+                res.write(`<h1>Login fail</h1>
+                <a href="http://localhost:3000">Home</a>`);
+                res.end();
+            }
+        });
     }
 
     if (req.method === "GET" && pathname === "/GetAccessToken") {
@@ -70,9 +112,9 @@ http.createServer((req, res) => {
         let code = urlLink.code;
         let redirect_url = urlLink.redirect_url;
 
-        let generateToken = require("./Model/generateToken");
+        let generateToken = require("./Model/GenerateToken");
 
-        let validateCode = require("./Model/validateCode");
+        let validateCode = require("./Model/ValidateCode");
         //check code, client_id......
 
         if (validateCode.code() && redirect_url === validateCode.client()) {
@@ -106,25 +148,30 @@ http.createServer((req, res) => {
 
     if (req.method === "POST" && pathname == "/UserProfile") {
         //check access_token in request header
-
         let grand_type = urlLink.grand_type;
         let client_id = urlLink.client_id;
         let redirect_url = urlLink.redirect_url;
         let authorization = "Bearer " + obj.access_token;
+
         if (req.headers.authorization === authorization) {
-            let getUserAge = require("./Model/getUserAge");
+            let getUserAge = require("./Model/GetUserAge");
             res.end(getUserAge());
-        }
-        else {
-            res.writeHead(404, {"Content-Type":"text/html"});
+        } else {
+            res.writeHead(404, { "Content-Type": "text/html" });
             res.end("wrong");
         }
+    }
+
+    if (pathname === "/redirect") {
+        res.statusCode = 302;
+        res.setHeader("Location", "/");
+        res.end();
     }
 
     if (pathname === "/register") {
         //check access_token in request header
         if (req.method === "GET") {
-            fs.readFile("./view/registerClient.html", (err, html) => {
+            pug.renderFile("./view/registerClient.pug", (err, html) => {
                 if (err) throw err;
                 res.end(html);
             });
@@ -133,8 +180,7 @@ http.createServer((req, res) => {
             let body = "";
             req.on("data", chunk => {
                 body += chunk; // convert Buffer to string
-                if (body.length > 1e6)
-                request.connection.destroy();
+                if (body.length > 1e6) request.connection.destroy();
             });
             req.on("end", () => {
                 clientInfor = qs.parse(body);
@@ -142,7 +188,6 @@ http.createServer((req, res) => {
                 console.log(clientInfor.appname);
                 res.write(`<h1>Register success</h1>
                 <a href="http://localhost:3000">Go to homepage</a>`);
-
                 res.end();
             });
         }

@@ -1,0 +1,18 @@
+include header.pug
+
+body
+    form(action="http://localhost:3000/register" method="POST").form-register
+        h1 Register Client
+        .form-group
+            label Application name
+            input(type="text" name="appname")
+        .form-group
+            label Homepage URL
+            input(type="text" name="home")
+        .form-group
+            label Callback URL
+            input(type="url" name="url")
+        .form-group
+            label Application description
+            textarea(name="description" id="" cols="30" rows="10")
+        button(type="submit") REGISTER

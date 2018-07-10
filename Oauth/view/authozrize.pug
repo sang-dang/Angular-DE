@@ -1,0 +1,20 @@
+include header.pug
+body.authozrize-page
+    .form-center
+        .content-left
+            form(action="http://localhost:3000/authorize?action=accept", method="POST").form-login
+                input(type="text" placeholder="Username" name="username" required)
+                input(type="password" placeholder="Password" name="password" required)
+                button(type="submit" id="btn-accept") ACCEPT
+                button(id="btn-deny" style="background: firebrick") DENY
+            .permiss
+                h4.text-allow This application will be able to:
+                ul
+                    li See your email address
+                h4.text-deny Will not able to:
+                ul
+                    li Access your direct messages.
+                    li See your password.
+        .content-right
+            img(src="http://gloria-project.eu/wp-content/uploads/2012/06/logo-256-transp.png", alt="logo")
+            a(href= client.linkClient) #{client.nameClient}

@@ -1,0 +1,187 @@
+body button {
+  border-radius: 25px;
+  background: linear-gradient(0deg, #1489e2 0%, #09bfef 100%);
+  width: 200px;
+  height: 46px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  display: block;
+  margin: auto;
+  outline: none;
+}
+body.authozrize-page .form-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: sans-serif;
+  padding: 50px;
+  border: 1.5px solid #ccd6dd;
+  border-radius: 7px;
+}
+body.authozrize-page .form-center .content-right,
+body.authozrize-page .form-center .content-left {
+  float: left;
+}
+body.authozrize-page .form-center .content-right {
+  width: 370px;
+  text-align: center;
+}
+body.authozrize-page .form-center .content-right img {
+  max-width: 200px;
+  border-radius: 5px;
+}
+body.authozrize-page .form-center .content-right a {
+  display: block;
+}
+body.authozrize-page .form-center input {
+  height: 40px;
+  width: 355px;
+  display: block;
+  border-radius: 20px;
+  padding: 0 20px;
+  margin-bottom: 15px;
+}
+body.authozrize-page .form-center button {
+  height: 40px;
+  width: 178px;
+  border-radius: 30px;
+  background: burlywood;
+  outline: none;
+  display: inline-block;
+}
+body.authozrize-page .form-center .permiss {
+  margin-top: 30px;
+  color: #66757f;
+}
+body.authozrize-page .form-center .permiss .text-allow {
+  color: #77b255;
+}
+body.authozrize-page .form-center .permiss .text-deny {
+  color: #66757f;
+}
+body h3 {
+  color: darkgreen;
+  font-size: 27px;
+}
+body .form-register {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px 20px;
+  box-shadow: 5px 5px 100px 10px #455572;
+  background: #e5eaef;
+  border-radius: 20px;
+  width: 370px;
+}
+body .form-register input,
+body .form-register textarea {
+  border-radius: 30px;
+  line-height: 29px;
+  width: 100%;
+  height: 35px;
+  padding-left: 20px;
+  border: 2px solid #e5eaef;
+  box-shadow: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #455572;
+  min-height: unset;
+  outline: none;
+  display: block;
+  font-family: "Orbitron", sans-serif;
+}
+body .form-register label {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  color: #455572;
+  margin-bottom: 5px;
+  font-family: "Orbitron", sans-serif;
+}
+body .form-register textarea {
+  height: 50px;
+  border-radius: unset;
+}
+body .form-register .form-group {
+  margin-bottom: 10px;
+}
+body .form-register h1 {
+  color: #455572;
+  font-family: "Orbitron", sans-serif;
+}
+body .form-register button {
+  -webkit-transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
+  -moz-transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
+  -ms-transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
+  -o-transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
+  transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
+  display: block;
+  margin: 20px auto;
+  width: 250px;
+  text-decoration: none;
+  border-radius: 4px;
+  padding: 13px 30px;
+  color: rgba(30, 22, 54, 0.6);
+  box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
+  font-family: "Orbitron", sans-serif;
+  outline: none;
+}
+body .form-register button:hover {
+  color: rgba(255, 255, 255, 0.85);
+  box-shadow: rgba(30, 22, 54, 0.7) 0 0px 0px 40px inset;
+}
+body.landing-page .navigation {
+  box-shadow: 3px 3px 2px 2px #c6c6c6;
+}
+body.landing-page .navigation .logo {
+  width: 70px;
+}
+body.landing-page .navigation .title {
+  display: inline-block;
+  margin: 0;
+}
+body.landing-page .navigation .content-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body.landing-page .navigation ul {
+  margin: 0;
+  padding-right: 600px;
+  text-decoration: none;
+  padding: 0;
+  height: 70px;
+}
+body.landing-page .navigation ul li {
+  text-decoration: none;
+  float: right;
+  width: 100px;
+  list-style: none;
+  position: relative;
+  height: 70px;
+  overflow: hidden;
+  text-align: center;
+}
+body.landing-page .navigation ul li a {
+  height: 70px;
+  line-height: 70px;
+}
+body.landing-page .navigation ul li:after {
+  content: "";
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  background: #df7002;
+  transform: rotateZ(45deg);
+  bottom: -10px;
+  left: calc(36%);
+  display: none;
+}
+body.landing-page .navigation ul li:hover:after {
+  display: block;
+}
