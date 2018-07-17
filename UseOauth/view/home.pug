@@ -1,13 +1,49 @@
 include header.pug
 body.home-page
     .container-fluid
+        #overlay
+        .profile-form
+            h1 User profile
+            img(src="", alt="").user-logo
+            .form-group
+                label Email
+                input.form-control(type="text" name="username")
+            .form-group
+                label Full name
+                input.form-control(type="text" value=fullName)
+        .form-login
+            h1 Sign In With
+            .login-option
+                .facebook
+                    span <i class="fab fa-facebook"></i>
+                    span Facebook
+                .google
+                    i.fab.fa-google
+                    span Google
+            .error-text
+            .form-group
+                label Username
+                input.form-control#username(type="text" name="username")
+            .form-group
+                label Password
+                input.form-control#password(type="password" name="password")
+            button#signin Sign in
+            a(href="http://localhost:3003/forgot-password") Forgot password?
+
         .nav-horizontal
             ul.dropdown-top.row
-                li.dropdown-item.col-md-4 Something
-                li.dropdown-item.col-md-4 Something
-                li.dropdown-item.col-md-4 Something
+                li.dropdown-item.col-md-4.first
+                    span.collapse-menu <i class="fas fa-align-justify"></i>
+                    img(src="http://gloria-project.eu/wp-content/uploads/2012/06/logo-256-transp.png", alt="logo").logo-nav
+                    span SUPER HERO
+                li.dropdown-item.col-md-4 
+                li.dropdown-item.col-md-4.last
+                    span.login #{statusLogin}
+                    span Settings
+                    a(href="http://localhost:3003/test-au") Test auth
+                    span#profile <i class="far fa-user"></i>
+                    span #{fullName}
         .nav-vertical
-            span.collapse-menu <i class="fas fa-align-justify"></i>
             ul.dropdown-left
                 li.dropdown-item home
                 li.dropdown-item awards
@@ -15,7 +51,16 @@ body.home-page
                 li.dropdown-item education
                 li.dropdown-item about
                 li.dropdown-item contacts
+        .carousel
+            img(src="http://picoreinternational.com/sites/default/files/Untitled-1_2.png", alt="")
+        .news
+            .title NEWS
+            img(src="https://ak8.picdn.net/shutterstock/videos/9686798/thumb/1.jpg", alt="").contents
+            img(src="https://ak8.picdn.net/shutterstock/videos/9686798/thumb/1.jpg", alt="").contents
+            img(src="https://ak8.picdn.net/shutterstock/videos/9686798/thumb/1.jpg", alt="").contents
     script
         include ../assets/javascript/home.js
+        include ../assets/javascript/script.js
+        
         
 

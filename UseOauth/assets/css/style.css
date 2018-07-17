@@ -6,6 +6,9 @@
   padding: 0;
 }
 .home-page .nav-horizontal .dropdown-top {
+  position: fixed;
+  top: 0;
+  z-index: 1;
   width: 100%;
   padding: 0;
   list-style: none;
@@ -16,38 +19,202 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 33.3333%;
   float: left;
-  border-left: 2px solid;
   height: 70px;
   text-align: center;
   color: #fff;
   background: black;
+  cursor: pointer;
 }
-.home-page .nav-horizontal .dropdown-top .dropdown-item:first-child {
-  border: none;
+.home-page .nav-horizontal .dropdown-top .dropdown-item.first .collapse-menu {
+  font-size: 30px;
+  color: #fff;
+}
+.home-page .nav-horizontal .dropdown-top .dropdown-item.first .logo-nav {
+  width: 70px;
+}
+.home-page .nav-horizontal .dropdown-top .dropdown-item.first span {
+  font-size: 30px;
+  font-weight: bold;
+  padding-left: 20px;
+}
+.home-page .nav-horizontal .dropdown-top .dropdown-item.last span {
+  padding: 0 20px;
 }
 .home-page .nav-vertical {
-  width: 200px;
+  width: 20%;
   height: 100%;
-}
-.home-page .nav-vertical .collapse-menu {
-  font-size: 30px;
+  position: fixed;
+  top: 70px;
+  z-index: 900;
 }
 .home-page .nav-vertical .dropdown-left {
   height: 100%;
+  width: 100%;
   padding: 0;
   margin: 0;
   display: none;
+  position: absolute;
+  z-index: 2;
 }
 .home-page .nav-vertical .dropdown-left .dropdown-item {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70px;
+  height: 50px;
   width: 100%;
-  border-top: 1px solid;
+  color: #fff;
+  text-transform: uppercase;
+  border-top: 1px solid #000;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
 }
-.home-page .nav-vertical .dropdown-left .dropdown-item:last-child {
-  border-bottom: 1px solid;
+.home-page .nav-vertical .dropdown-left .dropdown-item:hover {
+  background: rgba(0, 0, 0, 0.5);
+  color: #c76c17;
+}
+@keyframes dropdown {
+  0% {
+    height: 0px;
+  }
+  100% {
+    height: 400px;
+  }
+}
+.home-page .carousel img {
+  width: 100%;
+}
+.home-page .news .title {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+  font-size: 40px;
+  line-height: 70px;
+  color: peru;
+  font-weight: bold;
+}
+.home-page .news .contents {
+  width: 33.3333%;
+  padding: 50px;
+}
+.form-login,
+.profile-form {
+  width: 500px;
+  padding: 70px 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: sans-serif;
+  font-weight: 600;
+  z-index: 5;
+  background: #fff;
+  border-radius: 10px;
+  display: none;
+  border: 1px solid #d6d6d6;
+}
+.form-login h1,
+.profile-form h1 {
+  font-size: 39px;
+  color: #555555;
+  line-height: 1.2;
+  text-align: center;
+  margin-bottom: 50px;
+}
+.form-login .login-option,
+.profile-form .login-option {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+.form-login .login-option .facebook,
+.profile-form .login-option .facebook {
+  width: 48%;
+  border-radius: 10px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3b5998;
+  cursor: pointer;
+  color: #fff;
+}
+.form-login .login-option .facebook i,
+.profile-form .login-option .facebook i {
+  font-size: 30px;
+  margin-right: 17px;
+  padding-bottom: 3px;
+}
+.form-login .login-option .google,
+.profile-form .login-option .google {
+  width: 48%;
+  border-radius: 10px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+.form-login .login-option .google i,
+.profile-form .login-option .google i {
+  font-size: 30px;
+  margin-right: 17px;
+  padding-bottom: 3px;
+}
+.form-login .error-text,
+.profile-form .error-text {
+  color: red;
+}
+.form-login .form-group label,
+.profile-form .form-group label {
+  font-size: 16px;
+  color: #555555;
+  line-height: 1.5;
+}
+.form-login .form-group .form-control,
+.profile-form .form-group .form-control {
+  color: #333333;
+  line-height: 1.2;
+  font-size: 18px;
+  display: block;
+  width: 100%;
+  background: transparent;
+  height: 60px;
+  padding: 0 20px;
+}
+.form-login button,
+.profile-form button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  width: 100%;
+  height: 60px;
+  background-color: #333333;
+  border-radius: 10px;
+  font-size: 16px;
+  color: #fff;
+  line-height: 1.2;
+  font-weight: bold;
+}
+.form-login button:hover,
+.profile-form button:hover {
+  background: #000;
+}
+.form-login a,
+.profile-form a {
+  font-size: 12px;
+  margin-top: 20px;
+}
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 4;
+  cursor: pointer;
+  display: none;
 }

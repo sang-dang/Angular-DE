@@ -1,3 +1,9 @@
+body .register-page.content {
+  width: 400px;
+  border: 1px solid #e5efea;
+  padding: 40px 20px;
+  margin: 10% 40%;
+}
 body button {
   border-radius: 25px;
   background: linear-gradient(0deg, #1489e2 0%, #09bfef 100%);
@@ -26,7 +32,7 @@ body.authozrize-page .form-center .content-left {
   float: left;
 }
 body.authozrize-page .form-center .content-right {
-  width: 370px;
+  width: 280px;
   text-align: center;
 }
 body.authozrize-page .form-center .content-right img {

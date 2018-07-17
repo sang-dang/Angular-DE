@@ -1,0 +1,15 @@
+include header.pug
+body
+    include home.pug
+    #overlay
+    .profile-form
+        h1 User profile
+        img(src="", alt="").user-logo
+        .form-group
+            label Email
+            input.form-control(type="text" name="username")
+        .form-group
+            label Full name
+            input.form-control(type="text" value=fullName)
+
+

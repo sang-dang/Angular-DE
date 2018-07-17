@@ -4,6 +4,12 @@ module.exports = function(dbClients, client_id, redirect_url) {
     //         return true;
     //     };
     // }
-    if(client_id==="123456789" && redirect_url==="http://localhost:3003/code") return true;
-    return false;    
-}
+    if (
+        client_id === "123456789" &&
+        redirect_url === "http://localhost:3003/code"
+    ) {
+        console.log(dbClients);
+        return true;
+    }
+    return false;
+};

@@ -37,7 +37,6 @@ var obj = {
 
 var data = "";
 
-var clientInfor = {};
 
 http.createServer((req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -61,9 +60,9 @@ http.createServer((req, res) => {
         let client_id = urlLink.client_id;
         let redirect_url = urlLink.redirect_url;
         let client = {
-            nameClient: "Companyname",
+            nameClient: "Super Hero",
             linkClient:
-                "https://www.freelogodesign.org/Content/img/logo-ex-7.png"
+                "http://localhost:3003"
         };
         if (checkClients(dbClients, client_id, redirect_url)) {
             pug.renderFile(
@@ -104,7 +103,7 @@ http.createServer((req, res) => {
         });
     }
 
-    if (req.method === "GET" && pathname === "/GetAccessToken") {
+    if (req.method === "GET" && pathname === "/get-access-token") {
         //param when app request
         let client_id = urlLink.client_id;
         let clien_secret = urlLink.client_secret;
@@ -146,7 +145,7 @@ http.createServer((req, res) => {
         res.end();
     }
 
-    if (req.method === "POST" && pathname == "/UserProfile") {
+    if (req.method === "POST" && pathname == "/user-profile") {
         //check access_token in request header
         let grand_type = urlLink.grand_type;
         let client_id = urlLink.client_id;
@@ -154,8 +153,8 @@ http.createServer((req, res) => {
         let authorization = "Bearer " + obj.access_token;
 
         if (req.headers.authorization === authorization) {
-            let getUserAge = require("./Model/GetUserAge");
-            res.end(getUserAge());
+            let getUserName = require("./Model/GetUserName");
+            res.end(getUserName());
         } else {
             res.writeHead(404, { "Content-Type": "text/html" });
             res.end("wrong");
@@ -182,13 +181,13 @@ http.createServer((req, res) => {
                 body += chunk; // convert Buffer to string
                 if (body.length > 1e6) request.connection.destroy();
             });
+            
             req.on("end", () => {
-                clientInfor = qs.parse(body);
-                console.log(clientInfor);
-                console.log(clientInfor.appname);
-                res.write(`<h1>Register success</h1>
-                <a href="http://localhost:3000">Go to homepage</a>`);
-                res.end();
+                let clientInfor = qs.parse(body);
+                dbClients.push(clientInfor);
+                pug.renderFile("./view/RegisterFinish.pug", {client_id: "123456789", client_secret: "secret123456789"}, (err, html) => {
+                    res.end(html);
+                })
             });
         }
     }
