@@ -7,10 +7,10 @@ http.createServer((req, res) => {
     let content;
     fs.readFile("./main.html", (err, data) => {
         this.content = data;
+        if (pathname === "/") {
+            res.end(content);
+        }
     })
-    if (pathname === "/") {
-        res.end(content);
-    }
 }).listen(5000, function() {
     console.log("Server is listening port 5000");
 });
