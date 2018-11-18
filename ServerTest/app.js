@@ -8,7 +8,7 @@ http.createServer((req, res) => {
     fs.readFile("./main.html", (err, data) => {
         this.content = data;
         if (pathname === "/") {
-            res.end(content);
+            res.end(this.content);
         }
     })
 }).listen(5000, function() {
